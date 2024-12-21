@@ -1,9 +1,12 @@
 # Programmer's advice: 
 
 Run "npm run dev" in the frontend folder
-Run "php -S localhost:8000" in the frontend/publci folder
+
+Run "php -S localhost:8000" in the frontend/public folder
+
 Run WAMPServer with apache and MySQL activated
-Follow the schema.
+
+Follow the schema in backend/graphQL/schema.php
 
 
 # React + TypeScript + Vite
