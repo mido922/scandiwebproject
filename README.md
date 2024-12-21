@@ -1,3 +1,11 @@
+# Programmer's advice: 
+
+Run "npm run dev" in the frontend folder
+Run "php -S localhost:8000" in the frontend/publci folder
+Run WAMPServer with apache and MySQL activated
+Follow the schema.
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
