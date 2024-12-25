@@ -305,20 +305,6 @@ INSERT INTO `ordered_item_attributes` (`id`, `ordered_item_id`, `type`, `value`)
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `ordered_items`
---
-
-INSERT INTO `ordered_items` (`id`, `product_id`, `order_id`, `quantity`) VALUES
-(32, 'huarache-x-stussy-le', 28, 1),
-(33, 'huarache-x-stussy-le', 29, 1),
-(34, 'huarache-x-stussy-le', 30, 3),
-(35, 'huarache-x-stussy-le', 30, 3),
-(36, 'huarache-x-stussy-le', 30, 3),
-(37, 'huarache-x-stussy-le', 31, 1),
-(38, 'huarache-x-stussy-le', 31, 1);
-
-
---
 -- Dumping data for table `galleries`
 --
 
@@ -412,6 +398,20 @@ INSERT INTO `attributes` (`id`, `product_id`, `type`, `value`) VALUES
 INSERT INTO `categories` (`id`, `type`) VALUES
 (1, 'clothes'),
 (2, 'tech');
+
+--
+-- Dumping data for table `ordered_items`
+--
+
+INSERT INTO `ordered_items` (`id`, `product_id`, `order_id`, `quantity`) VALUES
+(32, 'huarache-x-stussy-le', 28, 1),
+(33, 'huarache-x-stussy-le', 29, 1),
+(34, 'huarache-x-stussy-le', 30, 3),
+(35, 'huarache-x-stussy-le', 30, 3),
+(36, 'huarache-x-stussy-le', 30, 3),
+(37, 'huarache-x-stussy-le', 31, 1),
+(38, 'huarache-x-stussy-le', 31, 1);
+
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
