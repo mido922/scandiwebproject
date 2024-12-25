@@ -175,3 +175,38 @@
   font-family: Roboto;
   font-weight: 700
 }
+
+.outOfStockButton {
+  all:unset;
+  width: 100%;
+  background-color: grey;
+  height: 50px;
+  color: white;
+  font-family: Raleway;
+}
+
+.instantBuyButton {
+  all:unset;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 999px;
+  color:white;
+}
+
+.imageContainer {
+  position: relative
+}
+
+.instantBuyImage {
+  width: 100px;
+  height: 100px;
+}
+
+.cartDetail {
+  width: 250px;
+}
+
+.cartQuantityButtons {
+  width: 50px;
+}

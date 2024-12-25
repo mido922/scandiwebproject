@@ -4,7 +4,7 @@ import './bootstrap.css'
 import Header from './components/Header.tsx'
 import MainPage from './components/ProductMainPage.tsx'
 import ProductDetails from './components/ProductDetails.tsx'
-import { BrowserRouter as Router, Routes, Route, data, useParams } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, data} from 'react-router-dom'
 import CartList from './components/CartList.tsx'
 import { useEffect, useState } from 'react'
 import React from 'react'
@@ -100,25 +100,32 @@ const App: React.FC = () => {
     }
   };
 
+
   const handleIncreaseQuantity = (id: string, attributes: Record<string, string>) => {
-    setCartItems((prevCart) =>
-      prevCart.map((item) =>
+    setCartItems((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
         item.id === id && JSON.stringify(item.attributes) === JSON.stringify(attributes)
           ? { ...item, quantity: item.quantity + 1 }
           : item
-      )
-    );
+      );
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   const handleDecreaseQuantity = (id: string, attributes: Record<string, string>) => {
-    setCartItems((prevCart) =>
-      prevCart
+    setCartItems((prevCart) => {
+      const updatedCart = prevCart
         .map((item) =>
           item.id === id && JSON.stringify(item.attributes) === JSON.stringify(attributes)
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
         .filter((item) => item.quantity > 0)
+
+        localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+        return updatedCart;
+      }
     );
   };
 
@@ -142,7 +149,7 @@ const App: React.FC = () => {
 
       <Router>
         <Routes>
-          <Route path="/" element={<MainPage data={data} setCategory={setCategory} />} ></Route>
+          <Route path="/" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/:category" element={<MainPage data={data} setCategory={setCategory} />} ></Route>
           <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} />} />
         </Routes>

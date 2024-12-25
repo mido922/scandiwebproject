@@ -28,13 +28,13 @@ query GetProducts($category: String) {
   }
 }`;
 
-const MainPage: React.FC<MainPageProps> = ({setCategory}) => {
+const MainPage: React.FC<MainPageProps> = ( props ) => {
 
   const { category } = useParams();
 
   useEffect(() => {
-    setCategory(category || null); 
-  }, [category, setCategory]);
+    props.setCategory(category || null);
+  }, [category, props.setCategory]);
 
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     variables: { category: category || null }
@@ -45,12 +45,13 @@ const MainPage: React.FC<MainPageProps> = ({setCategory}) => {
 
   return (
     <div>
-      <div className="category m-3" style={{ fontFamily: 'Raleway', fontWeight: 400, fontSize:24, }}>{category}</div>
+      <div className="category m-3" style={{ fontFamily: 'Raleway', fontWeight: 400, fontSize: 24, }}>{category}</div>
       <div id="mainview" className='d-flex flex-wrap'>
         {data.products.map((cartObject: any) => (
           <ProductCard
             key={cartObject.id}
             cartObject={cartObject}
+            addToCart={props.addToCart}
           />
         ))}
       </div>

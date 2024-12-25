@@ -22,17 +22,17 @@ $attributeType = new ObjectType([
 $attributeInputType = new InputObjectType([
     'name' => 'AttributeInput',
     'fields' => [
-        'type' => Type::nonNull(Type::string()), // Attribute type (e.g., Size, Color)
-        'value' => Type::nonNull(Type::string()), // Attribute value (e.g., 40, Green)
+        'type' => Type::nonNull(Type::string()), 
+        'value' => Type::nonNull(Type::string()),
     ],
 ]);
 
 $orderedItemInputType = new InputObjectType([
     'name' => 'OrderedItemInput',
     'fields' => [
-        'product_id' => Type::nonNull(Type::string()), // Product ID as a string
-        'attributes' => Type::nonNull(Type::listOf($attributeInputType)), // List of attributes
-        'quantity' => Type::nonNull(Type::int()), // Quantity of the product
+        'product_id' => Type::nonNull(Type::string()),
+        'attributes' => Type::nonNull(Type::listOf($attributeInputType)), 
+        'quantity' => Type::nonNull(Type::int()), 
     ],
 ]);
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useLocation } from "react-router-dom";
+import parse from 'html-react-parser';
 
 interface ProductDetailsProps extends Record<string, any> { }
 
@@ -23,6 +24,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
         }));
     };
 
+    const formattedDescription = product.description
+        .replace(/\\n/g, '<br />')
+        .replace(/\n/g, '<br />');
+
+    console.log(formattedDescription)
+
     const isBuyNowDisabled = Object.keys(groupedAttributes).some(
         (type) => !selectedAttributes[type]
     );
@@ -32,8 +39,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
             ...product,
             attributes: Object.keys(groupedAttributes).map((type) => ({
                 type,
-                options: groupedAttributes[type], // All available options
-                selected: selectedAttributes[type] || null, // Selected attribute (if any)
+                options: groupedAttributes[type],
+                selected: selectedAttributes[type] || null,
             })),
             quantity: 1,
         };
@@ -50,30 +57,70 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
 
     return (
         <div className="container d-flex flex-row">
-            <div className="galleryList" id="productDetailsGalleries">
-                {product.galleries.map((cartObject: any) => (
+            <div className="galleryList  d-flex flex-column flex-nowrap" id="productDetailsGalleries">
+                {product.galleries.length > 1 && product.galleries.map((cartObject: any) => (
                     <img
                         key={product.galleries.id}
-                        className="galleryImage border" src={cartObject.url} />
+                        className="galleryImage border m-2" src={cartObject.url} />
                 ))}
             </div>
 
-            <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img className="d-block w-100" src={product.galleries[0].url} />
-                    </div>
-                    <div className="carousel-item">
-                        <img className="d-block w-100" src={product.galleries[1].url} />
-                    </div>
+            <div id="productCarousel" className="carousel slide m-2" data-bs-ride="carousel">
+                <div className="carousel-indicators">
+                    {product.galleries.map((_: any, index: any) => (
+                        <button
+                            key={index}
+                            type="button"
+                            data-bs-target="#productCarousel"
+                            data-bs-slide-to={index}
+                            className={index === 0 ? "active" : ""}
+                            aria-current={index === 0 ? "true" : undefined}
+                            aria-label={`Slide ${index + 1}`}
+                        ></button>
+                    ))}
                 </div>
+                <div className="carousel-inner">
+                    {product.galleries.map((image: any, index: any) => (
+                        <div
+                            key={index}
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        >
+                            <img
+                                src={image.url}
+                                alt={`Slide ${index + 1}`}
+                                style={{ objectFit: "cover", maxHeight: "500px" }}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                <button
+                    className="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#productCarousel"
+                    data-bs-slide="prev"
+                >
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                    className="carousel-control-next"
+                    type="button"
+                    data-bs-target="#productCarousel"
+                    data-bs-slide="next"
+                >
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
             </div>
-            <div>
+
+            <div className="ms-5">
                 <h1 className="ralewayFont-600">{product.name}</h1>
+                
                 <div id="radioButtons ">
                     {Object.keys(groupedAttributes).map((type) => (
                         <div key={type}>
-                            <h3 className="robotoFont-700 capitalize">{type}</h3>
+                            <h3 className="robotoFont-700 capitalize">{type}:</h3>
                             <div className="d-flex flex-row">
                                 {groupedAttributes[type].map((value: string) => (
                                     <div
@@ -81,6 +128,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                                         className={`attribute-box ${selectedAttributes[type] === value ? "selected" : ""
                                             }`}
                                         onClick={() => handleAttributeChange(type, value)}
+                                        style={type === "Color" ? { backgroundColor: value, color: value } : {}}
                                     >
                                         {value}
                                     </div>
@@ -88,17 +136,18 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                             </div>
                         </div>
                     ))}
-
-                    <h1>Price:</h1>
-                    <h1>{product.prices[0].amount}</h1>
                 </div>
+
+
+                <h1>Price:</h1>
+                <h1>${product.prices[0].amount}</h1>
                 <button
-                    disabled={isBuyNowDisabled}
+                    disabled={isBuyNowDisabled || product.inStock == 0}
                     onClick={handleAddToCart}
-                    className="addToCartButton p-1 d-flex justify-content-center align-items-center"
+                    className={`${product.inStock == 0 ? "outOfStockButton" : "addToCartButton"} p-1 d-flex justify-content-center align-items-center`}
                 >ADD TO CART</button>
                 <p>
-                    {product.description}
+                    {parse(formattedDescription)}
                 </p>
             </div>
         </div>

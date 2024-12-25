@@ -38,19 +38,26 @@ const Header: React.FC<HeaderProps> = (props) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  console.log("header got", props.category)
+  console.log(data)
 
   return (
     <header id="header" className='navbar container justify-content-between'>
       <div className="d-flex">
         <div>
-          <a className={`categorybutton p-3 ${props.category == null ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/">ALL</a>
+          <a
+            className={`categorybutton p-3 ${props.category == null ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/"
+            data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
+          >ALL</a>
         </div>
         <div>
-          <a className={`categorybutton p-3 ${props.category == "tech" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/tech">TECH</a>
+          <a className={`categorybutton p-3 ${props.category == "tech" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/tech"
+            data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
+          >TECH</a>
         </div>
         <div>
-          <a className={`categorybutton p-3 ${props.category == "clothes" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/clothes">CLOTHES</a>
+          <a className={`categorybutton p-3 ${props.category == "clothes" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/clothes"
+            data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
+          >CLOTHES</a>
         </div>
       </div>
       <img className="logoIcon" src="https://i.imgur.com/oRJfdK8.png"></img>
