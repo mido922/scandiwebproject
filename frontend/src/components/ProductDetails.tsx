@@ -34,6 +34,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
         (type) => !selectedAttributes[type]
     );
 
+    const addToCartButton = () => {
+        handleAddToCart ()
+        props.toggleCart()
+    }
+
     const handleAddToCart = () => {
         const productToAdd = {
             ...product,
@@ -156,7 +161,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                 <h1>${product.prices[0].amount}</h1>
                 <button
                     disabled={isBuyNowDisabled || product.inStock == 0}
-                    onClick={handleAddToCart}
+                    onClick={addToCartButton}
                     className={`${product.inStock == 0 ? "outOfStockButton" : "addToCartButton"} p-1 d-flex justify-content-center align-items-center`}
                     data-testid='add-to-cart'
                 >ADD TO CART</button>

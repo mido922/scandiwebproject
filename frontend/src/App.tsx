@@ -152,7 +152,7 @@ const App: React.FC = () => {
           <Route path="/" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/all" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/:category" element={<MainPage data={data} setCategory={setCategory} />} ></Route>
-          <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} />} />
+          <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} toggleCart={toggleCart} />} />
         </Routes>
       </Router>
     </div>
