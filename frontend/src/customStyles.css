@@ -63,9 +63,9 @@
 
 .cartList {  position: fixed;
   overflow-y: auto;
-  top:0;
+  top: 100px;
   bottom: 1px;
-  right: 30px;
+  right: 60px;
   width: 500px;
   background-color: white;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -213,4 +213,10 @@
 
 #cartIconContainer {
   all:unset;
+  z-index: 999999;
+}
+
+#header {
+  background-color: white;
+  z-index: 15;
 }
