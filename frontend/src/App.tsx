@@ -4,8 +4,7 @@ import './bootstrap.css'
 import Header from './components/Header.tsx'
 import MainPage from './components/ProductMainPage.tsx'
 import ProductDetails from './components/ProductDetails.tsx'
-import { BrowserRouter as Router, Routes, Route, data} from 'react-router-dom'
-import CartList from './components/CartList.tsx'
+import { BrowserRouter as Router, Routes, Route, data } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import React from 'react'
 import { gql, useMutation } from '@apollo/client'
@@ -24,7 +23,6 @@ const App: React.FC = () => {
 
   const [saveOrder] = useMutation(SAVE_ORDER_MUTATION)
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [category, setCategory] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +32,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-  const toggleCart = () => setIsCartOpen(!isCartOpen)
 
   const addToCart = (product: any) => {
     const cartItemKey = JSON.stringify({
@@ -123,36 +120,30 @@ const App: React.FC = () => {
         )
         .filter((item) => item.quantity > 0)
 
-        localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-        return updatedCart;
-      }
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+      return updatedCart;
+    }
     );
   };
 
   return (
-    <div className='container'>
-      <Header toggleCart={toggleCart}
+    <div id="appPage" className='container'>
+      <Header
         cartLength={totalItems}
-        category={category}/>
-      {isCartOpen && (
-        <CartList
-          cartItems={cartItems}
-          handlePlaceOrder={handlePlaceOrder}
-          handleIncreaseQuantity={handleIncreaseQuantity}
-          handleDecreaseQuantity={handleDecreaseQuantity}
-        />
-      )}
-      {isCartOpen && (
-        <div className='overlay-background' onClick={toggleCart}>
-        </div>
-      )}
+        cartItems={cartItems}
+        category={category}
+        handleIncreaseQuantity={handleIncreaseQuantity}
+        handleDecreaseQuantity={handleDecreaseQuantity}
+        handlePlaceOrder={handlePlaceOrder}
+      />
+
 
       <Router>
         <Routes>
           <Route path="/" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/all" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/:category" element={<MainPage data={data} setCategory={setCategory} />} ></Route>
-          <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} toggleCart={toggleCart} />} />
+          <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} />} />
         </Routes>
       </Router>
     </div>

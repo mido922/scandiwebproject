@@ -18,25 +18,29 @@ const CartList: React.FC<CartListProps> = (props) => {
         totalItemsText = `${totalItems} items.`
 
     const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
-    
+
     return (
-        <div 
-        className="cartList"
-        data-testid="cart-overlay"
+        <div
+            className="cartList"
+            data-testid="cart-overlay"
         >
             <div className="d-flex align-items-center"><div className="p-3 ralewayFont-700">My Bag,</div><div data-testid='cart-item-amount' >{totalItemsText}</div></div>
+            
+            
             {props.cartItems.map((item: any) => (
-                <div className="cartBox container d-flex flex-row ralewayFont-300 m-3">
-                    <div className="cartDetail d-flex flex-column">
+                <div className="cartBox row container d-flex flex-row ralewayFont-300 m-3">
+
+                    <div className="cartAlign col-7 cartDetail d-flex flex-column">
+                        
                         <h3>{item.name}</h3>
                         <h3>${item.prices[0].amount * item.quantity}</h3>
                         {item.attributes.map((attribute: any) => (
                             <div className="propertyHolder" key={attribute.type}>
                                 <strong>{attribute.type}:</strong>{" "} <br />
-                                <div 
-                                className="d-flex flex-row"
-                                id="CartItemContainer"
-                                data-testid={`cart-item-attribute-${toKebabCase(attribute.type)}`}
+                                <div
+                                    className="d-flex flex-row"
+                                    id="CartItemContainer"
+                                    data-testid={`cart-item-attribute-${toKebabCase(attribute.type)}`}
                                 >
                                     {attribute.type != "Color" && attribute.options.map((option: string) => (
                                         <span
@@ -58,7 +62,7 @@ const CartList: React.FC<CartListProps> = (props) => {
                                     {attribute.type == "Color" && attribute.options.map((option: string) => (
                                         <span
                                             key={option}
-                                            data-testid='cart-item-attribute-${attribute name in kebab case}-${attribute name in kebab case}-selected' 
+                                            data-testid='cart-item-attribute-${attribute name in kebab case}-${attribute name in kebab case}-selected'
                                             style={{
                                                 border: 2,
                                                 borderStyle: "solid",
@@ -77,26 +81,26 @@ const CartList: React.FC<CartListProps> = (props) => {
                     </div>
 
 
-                    <div className="cartQuantityButtons d-flex flex-column justify-content-between align-items-center">
-                        <button 
-                        className="quantityButtons d-flex justify-content-center align-items-center" 
-                        onClick={() => props.handleIncreaseQuantity(item.id, item.attributes)}
-                        data-testid='cart-item-amount-increase'
+                    <div className="col-1 cartQuantityButtons d-flex flex-column justify-content-between align-items-center">
+                        <button
+                            className="quantityButtons d-flex justify-content-center align-items-center"
+                            onClick={() => props.handleIncreaseQuantity(item.id, item.attributes)}
+                            data-testid='cart-item-amount-increase'
                         >
                             +
                         </button>
                         {item.quantity}
-                        <button 
-                        className="quantityButtons d-flex justify-content-center align-items-center" 
-                        onClick={() => props.handleDecreaseQuantity(item.id, item.attributes)}
-                        data-testid='cart-item-amount-decrease'
+                        <button
+                            className="quantityButtons d-flex justify-content-center align-items-center"
+                            onClick={() => props.handleDecreaseQuantity(item.id, item.attributes)}
+                            data-testid='cart-item-amount-decrease'
                         >
                             -
                         </button>
                     </div>
 
 
-                    <div className="cartImage d-flex align-items-center">
+                    <div className="cartAlign col-4 cartImage d-flex align-items-center">
                         <img style={{ width: 200, height: 200, }} src={item.galleries[0].url}></img>
                     </div>
                 </div>
@@ -115,8 +119,6 @@ const CartList: React.FC<CartListProps> = (props) => {
                     fontWeight: 600,
                 }}
             >PLACE ORDER</button>
-
-
         </div>
     )
 }
