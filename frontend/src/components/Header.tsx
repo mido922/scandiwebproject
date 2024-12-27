@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = (props) => {
       <div className="d-flex">
         <div>
           <a
-            className={`categorybutton p-3 ${props.category == null ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/"
+            className={`categorybutton p-3 ${props.category == null ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/all"
             data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
           >ALL</a>
         </div>
@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = (props) => {
       <img className="logoIcon" src="https://i.imgur.com/oRJfdK8.png"></img>
       <br></br>
       {props.cartCount}
-      <div id="cartIconContainer">
+      <div id="cartIconContainer" data-testid='cart-btn'>
         {(props.cartLength > 0) && (<div id="cartIconBubble">{props.cartLength}</div>)}
         <img className="cartIcon" src="https://i.imgur.com/CeWkpes.png" onClick={props.toggleCart} />
       </div>

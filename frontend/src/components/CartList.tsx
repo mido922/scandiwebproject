@@ -108,7 +108,6 @@ const CartList: React.FC<CartListProps> = (props) => {
                 disabled={props.cartItems.length == 0}
                 onClick={props.handlePlaceOrder}
                 className="addToCartButton d-flex justify-content-center align-items-center"
-                data-testid='cart-btn'
                 style={{
                     fontWeight: 600,
                 }}
