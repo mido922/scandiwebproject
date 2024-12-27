@@ -139,7 +139,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                                         key={value}
                                         className={`attribute-box ${selectedAttributes[type] === value ? "selected" : ""
                                             }`}
-                                        data-testid={`product-attribute-${type}-${value}`}
+                                        data-testid={`product-attribute-${type.toLowerCase}-${value}`}
                                         onClick={() => handleAttributeChange(type, value)}
                                         style={type === "Color" ? { backgroundColor: value, color: value } : {}}
                                     >
