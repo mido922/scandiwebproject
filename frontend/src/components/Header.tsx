@@ -46,17 +46,17 @@ const Header: React.FC<HeaderProps> = (props) => {
         <div>
           <a
             className={`categorybutton p-3 ${props.category == null ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/all"
-            data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
+            data-testid={`${props.category == null ? 'active-category-link' : 'category-link'}`}
           >ALL</a>
         </div>
         <div>
           <a className={`categorybutton p-3 ${props.category == "tech" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/tech"
-            data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
+            data-testid={`${props.category == "tech" ? 'active-category-link' : 'category-link'}`}
           >TECH</a>
         </div>
         <div>
           <a className={`categorybutton p-3 ${props.category == "clothes" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/clothes"
-            data-testid={`categorylink p-3 ${props.category == null ? 'active-category-link' : ''}`}
+            data-testid={`${props.category == "clothes" ? 'active-category-link' : 'category-link'}`}
           >CLOTHES</a>
         </div>
       </div>
