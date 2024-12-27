@@ -55,71 +55,83 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
         )
     }
 
+    const toKebabCase = (str:any) => str.replace(/\s+/g, '-').toLowerCase();
+
     return (
         <div className="container d-flex flex-row">
-            <div className="galleryList  d-flex flex-column flex-nowrap" id="productDetailsGalleries">
-                {product.galleries.length > 1 && product.galleries.map((cartObject: any) => (
-                    <img
-                        key={product.galleries.id}
-                        className="galleryImage border m-2" src={cartObject.url} />
-                ))}
-            </div>
-
-            <div id="productCarousel" className="carousel slide m-2" data-bs-ride="carousel">
-                <div className="carousel-indicators">
-                    {product.galleries.map((_: any, index: any) => (
-                        <button
-                            key={index}
-                            type="button"
-                            data-bs-target="#productCarousel"
-                            data-bs-slide-to={index}
-                            className={index === 0 ? "active" : ""}
-                            aria-current={index === 0 ? "true" : undefined}
-                            aria-label={`Slide ${index + 1}`}
-                        ></button>
-                    ))}
-                </div>
-                <div className="carousel-inner">
-                    {product.galleries.map((image: any, index: any) => (
-                        <div
-                            key={index}
-                            className={`carousel-item ${index === 0 ? "active" : ""}`}
-                        >
-                            <img
-                                src={image.url}
-                                alt={`Slide ${index + 1}`}
-                                style={{ objectFit: "cover", maxHeight: "500px" }}
-                            />
-                        </div>
+            <div 
+            id="galleries"
+            className="d-flex"
+            data-testid='product-gallery'
+            >
+                <div className="galleryList  d-flex flex-column flex-nowrap" id="productDetailsGalleries">
+                    {product.galleries.length > 1 && product.galleries.map((cartObject: any) => (
+                        <img
+                            key={product.galleries.id}
+                            className="galleryImage border m-2" src={cartObject.url} />
                     ))}
                 </div>
 
-                <button
-                    className="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#productCarousel"
-                    data-bs-slide="prev"
-                >
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button
-                    className="carousel-control-next"
-                    type="button"
-                    data-bs-target="#productCarousel"
-                    data-bs-slide="next"
-                >
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
+                <div id="productCarousel" className="carousel slide m-2" data-bs-ride="carousel">
+                    <div className="carousel-indicators">
+                        {product.galleries.map((_: any, index: any) => (
+                            <button
+                                key={index}
+                                type="button"
+                                data-bs-target="#productCarousel"
+                                data-bs-slide-to={index}
+                                className={index === 0 ? "active" : ""}
+                                aria-current={index === 0 ? "true" : undefined}
+                                aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
+                    </div>
+                    <div className="carousel-inner">
+                        {product.galleries.map((image: any, index: any) => (
+                            <div
+                                key={index}
+                                className={`carousel-item ${index === 0 ? "active" : ""}`}
+                            >
+                                <img
+                                    src={image.url}
+                                    alt={`Slide ${index + 1}`}
+                                    style={{ objectFit: "cover", maxHeight: "500px" }}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <button
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#productCarousel"
+                        data-bs-slide="prev"
+                    >
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target="#productCarousel"
+                        data-bs-slide="next"
+                    >
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
 
             <div className="ms-5">
                 <h1 className="ralewayFont-600">{product.name}</h1>
-                
-                <div id="radioButtons ">
+
+                <div 
+                id="radioButtons"
+                >
                     {Object.keys(groupedAttributes).map((type) => (
-                        <div key={type}>
+                        <div
+                        data-testid={`product-attribute-${toKebabCase(type)}`}
+                        key={type}>
                             <h3 className="robotoFont-700 capitalize">{type}:</h3>
                             <div className="d-flex flex-row">
                                 {groupedAttributes[type].map((value: string) => (
@@ -145,8 +157,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                     disabled={isBuyNowDisabled || product.inStock == 0}
                     onClick={handleAddToCart}
                     className={`${product.inStock == 0 ? "outOfStockButton" : "addToCartButton"} p-1 d-flex justify-content-center align-items-center`}
+                    data-testid='add-to-cart'
                 >ADD TO CART</button>
-                <p>
+                <p
+                    id="productDescription"
+                    data-testid='product-description'
+                >
                     {parse(formattedDescription)}
                 </p>
             </div>

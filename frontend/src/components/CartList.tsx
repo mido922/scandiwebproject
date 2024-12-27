@@ -17,26 +17,28 @@ const CartList: React.FC<CartListProps> = (props) => {
     else
         totalItemsText = `${totalItems} items.`
 
-
-        
-
+    const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
+    
     return (
         <div className="cartList ">
-            <div className="d-flex align-items-center"><div className="p-3 ralewayFont-700">My Bag,</div><div>{totalItemsText}</div></div>
+            <div className="d-flex align-items-center"><div className="p-3 ralewayFont-700">My Bag,</div><div data-testid='cart-item-amount' >{totalItemsText}</div></div>
             {props.cartItems.map((item: any) => (
                 <div className="cartBox container d-flex flex-row ralewayFont-300 m-3">
-                    
-
                     <div className="cartDetail d-flex flex-column">
                         <h3>{item.name}</h3>
                         <h3>${item.prices[0].amount * item.quantity}</h3>
                         {item.attributes.map((attribute: any) => (
                             <div className="propertyHolder" key={attribute.type}>
                                 <strong>{attribute.type}:</strong>{" "} <br />
-                                <div className="d-flex flex-row">
+                                <div 
+                                className="d-flex flex-row"
+                                id="CartItemContainer"
+                                data-testid={`cart-item-attribute-${toKebabCase(attribute.type)}`}
+                                >
                                     {attribute.type != "Color" && attribute.options.map((option: string) => (
                                         <span
                                             key={option}
+                                            data-testid={option === attribute.selected ? `cart-item-attribute-${attribute.type}-${option}-selected` : `cart-item-attribute-${attribute.type}-${option}`}
                                             style={{
                                                 border: 2,
                                                 borderStyle: "solid",
@@ -53,6 +55,7 @@ const CartList: React.FC<CartListProps> = (props) => {
                                     {attribute.type == "Color" && attribute.options.map((option: string) => (
                                         <span
                                             key={option}
+                                            data-testid='cart-item-attribute-${attribute name in kebab case}-${attribute name in kebab case}-selected' 
                                             style={{
                                                 border: 2,
                                                 borderStyle: "solid",
@@ -72,11 +75,19 @@ const CartList: React.FC<CartListProps> = (props) => {
 
 
                     <div className="cartQuantityButtons d-flex flex-column justify-content-between align-items-center">
-                        <button className="quantityButtons d-flex justify-content-center align-items-center" onClick={() => props.handleIncreaseQuantity(item.id, item.attributes)}>
+                        <button 
+                        className="quantityButtons d-flex justify-content-center align-items-center" 
+                        onClick={() => props.handleIncreaseQuantity(item.id, item.attributes)}
+                        data-testid='cart-item-amount-increase'
+                        >
                             +
                         </button>
                         {item.quantity}
-                        <button className="quantityButtons d-flex justify-content-center align-items-center" onClick={() => props.handleDecreaseQuantity(item.id, item.attributes)}>
+                        <button 
+                        className="quantityButtons d-flex justify-content-center align-items-center" 
+                        onClick={() => props.handleDecreaseQuantity(item.id, item.attributes)}
+                        data-testid='cart-item-amount-decrease'
+                        >
                             -
                         </button>
                     </div>
@@ -90,7 +101,7 @@ const CartList: React.FC<CartListProps> = (props) => {
 
             <div className="d-flex robotoFont-500 justify-content-between align-items-center">
                 <h1>Total</h1>
-                <div>${totalCost}</div>
+                <div data-testid='cart-total'>${totalCost}</div>
             </div>
 
             <button

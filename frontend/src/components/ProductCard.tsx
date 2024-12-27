@@ -43,8 +43,12 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
+  const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
+
+
   return (
     <div
+      data-testid={`product-${toKebabCase(cartObject.name)}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={cartObject.inStock ? handleViewDetails : handleViewDetails} className={`product-card p-3 ${!cartObject.inStock ? "out-of-stock" : ""}`}>
