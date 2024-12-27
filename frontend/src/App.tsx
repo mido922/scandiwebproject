@@ -24,6 +24,10 @@ const App: React.FC = () => {
   const [saveOrder] = useMutation(SAVE_ORDER_MUTATION)
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [category, setCategory] = useState<string | null>(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const toggleCart = () => setIsCartOpen(!isCartOpen)
+
 
   useEffect(() => {
     const savedCartItems = localStorage.getItem('cartItems');
@@ -135,6 +139,8 @@ const App: React.FC = () => {
         handleIncreaseQuantity={handleIncreaseQuantity}
         handleDecreaseQuantity={handleDecreaseQuantity}
         handlePlaceOrder={handlePlaceOrder}
+        toggleCart={toggleCart}
+        isCartOpen={isCartOpen}
       />
 
 
@@ -143,7 +149,7 @@ const App: React.FC = () => {
           <Route path="/" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/all" element={<MainPage data={data} setCategory={setCategory} addToCart={addToCart} />} ></Route>
           <Route path="/:category" element={<MainPage data={data} setCategory={setCategory} />} ></Route>
-          <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} />} />
+          <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} setCategory={setCategory} toggleCart={toggleCart} />} />
         </Routes>
       </Router>
     </div>

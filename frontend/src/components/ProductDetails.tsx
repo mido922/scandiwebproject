@@ -36,6 +36,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
 
     const addToCartButton = () => {
         handleAddToCart ()
+        console.log("hi")
         props.toggleCart()
     }
 

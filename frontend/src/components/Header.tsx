@@ -29,12 +29,6 @@ const Header: React.FC<HeaderProps> = (props) => {
       }
     }`;
 
-
-  
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const toggleCart = () => setIsCartOpen(!isCartOpen)
-
   const { category } = useParams()
 
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
@@ -70,12 +64,12 @@ const Header: React.FC<HeaderProps> = (props) => {
         <img className="logoIcon" src="https://i.imgur.com/oRJfdK8.png"></img>
         <br></br>
         {props.cartCount}
-        <button id="cartIconContainer" data-testid='cart-btn' onClick={toggleCart}>
+        <button id="cartIconContainer" data-testid='cart-btn' onClick={props.toggleCart}>
           {(props.cartLength > 0) && (<div id="cartIconBubble">{props.cartLength}</div>)}
           <img className="cartIcon" src="https://i.imgur.com/CeWkpes.png" />
         </button>
       </header>
-      {isCartOpen && (
+      {props.isCartOpen && (
         <CartList
           cartItems={props.cartItems}
           handlePlaceOrder={props.handlePlaceOrder}
@@ -83,8 +77,8 @@ const Header: React.FC<HeaderProps> = (props) => {
           handleDecreaseQuantity={props.handleDecreaseQuantity}
         />
       )}
-      {isCartOpen && (
-        <div className='overlay-background' onClick={toggleCart}>
+      {props.isCartOpen && (
+        <div className='overlay-background' onClick={props.toggleCart}>
         </div>
       )}
 
