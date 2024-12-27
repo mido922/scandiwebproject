@@ -20,7 +20,10 @@ const CartList: React.FC<CartListProps> = (props) => {
     const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
     
     return (
-        <div className="cartList ">
+        <div 
+        className="cartList"
+        data-testid="cart-overlay"
+        >
             <div className="d-flex align-items-center"><div className="p-3 ralewayFont-700">My Bag,</div><div data-testid='cart-item-amount' >{totalItemsText}</div></div>
             {props.cartItems.map((item: any) => (
                 <div className="cartBox container d-flex flex-row ralewayFont-300 m-3">
