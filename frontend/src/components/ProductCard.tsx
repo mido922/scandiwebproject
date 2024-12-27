@@ -45,6 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
   const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
 
+  const specificRender = "Nike Air Huarache Le"
 
   return (
     <div
@@ -59,15 +60,18 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
             alt={cartObject.name}
             className="cartIconImage"
           />
-          
-            <button
-              className="instantBuyButton"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleInstantAdd();
-              }}
-              disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" />ADD</button>
-          
+
+          <button
+            className="instantBuyButton"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleInstantAdd();
+            }}
+            disabled={!cartObject.inStock}>
+            {cartObject.name == specificRender && "ADD"}
+            <img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" />
+          </button>
+
         </div>
 
         {!cartObject.inStock && (
