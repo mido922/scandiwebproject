@@ -66,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
                 e.stopPropagation();
                 handleInstantAdd();
               }}
-              disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" /></button>
+              disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" />ADD</button>
           )}
         </div>
 
