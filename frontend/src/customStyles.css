@@ -210,3 +210,7 @@
 .cartQuantityButtons {
   width: 50px;
 }
+
+#cartIconContainer {
+  all:unset;
+}

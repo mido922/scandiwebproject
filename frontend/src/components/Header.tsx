@@ -63,10 +63,10 @@ const Header: React.FC<HeaderProps> = (props) => {
       <img className="logoIcon" src="https://i.imgur.com/oRJfdK8.png"></img>
       <br></br>
       {props.cartCount}
-      <div id="cartIconContainer" data-testid='cart-btn'>
+      <button id="cartIconContainer" data-testid='cart-btn' onClick={props.toggleCart}>
         {(props.cartLength > 0) && (<div id="cartIconBubble">{props.cartLength}</div>)}
-        <img className="cartIcon" src="https://i.imgur.com/CeWkpes.png" onClick={props.toggleCart} />
-      </div>
+        <img className="cartIcon" src="https://i.imgur.com/CeWkpes.png"  />
+      </button>
     </header>
   )
 }
