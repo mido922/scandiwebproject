@@ -59,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
             alt={cartObject.name}
             className="cartIconImage"
           />
-          {cartObject.inStock && isHovered && (
+          
             <button
               className="instantBuyButton"
               onClick={(e) => {
@@ -67,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
                 handleInstantAdd();
               }}
               disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" />ADD</button>
-          )}
+          
         </div>
 
         {!cartObject.inStock && (
