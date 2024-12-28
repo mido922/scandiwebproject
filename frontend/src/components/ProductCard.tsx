@@ -66,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
                 e.stopPropagation();
                 handleInstantAdd();
               }}
-              disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" />ADD</button>
+              disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" /></button>
           )}
         </div>
 
@@ -77,7 +77,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
       <div>
         <h3 style={{ fontFamily: 'Raleway', fontWeight: 300 }}>{cartObject.name}</h3>
-        <p>
+        <p style={{fontWeight:500}}>
           {cartObject.prices[0].amount}$
         </p>
       </div>

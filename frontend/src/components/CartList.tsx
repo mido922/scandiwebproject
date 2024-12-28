@@ -10,12 +10,12 @@ const CartList: React.FC<CartListProps> = (props) => {
 
     const totalCost = props.cartItems.reduce((sum: any, item: any) => sum + item.prices[0].amount * item.quantity, 0);
 
-    var totalItemsText = "No items."
+    var totalItemsText = "No items"
 
     if (totalItems == 1)
-        totalItemsText = "1 item."
+        totalItemsText = "1 item"
     else
-        totalItemsText = `${totalItems} items.`
+        totalItemsText = `${totalItems} items`
 
     const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
 
@@ -25,18 +25,17 @@ const CartList: React.FC<CartListProps> = (props) => {
             data-testid="cart-overlay"
         >
             <div className="d-flex align-items-center"><div className="p-3 ralewayFont-700">My Bag,</div><div data-testid='cart-item-amount' >{totalItemsText}</div></div>
-            
-            
+
+
             {props.cartItems.map((item: any) => (
                 <div className="cartBox row container d-flex flex-row ralewayFont-300 m-3">
 
                     <div className="cartAlign col-7 cartDetail d-flex flex-column">
-                        
-                        <h3>{item.name}</h3>
-                        <h3>${item.prices[0].amount * item.quantity}</h3>
+                        <h3 className="roboto" style={{ fontWeight: 300 }}>{item.name}</h3>
+                        <h3 id="cartPrice">${item.prices[0].amount * item.quantity}</h3>
                         {item.attributes.map((attribute: any) => (
                             <div className="propertyHolder" key={attribute.type}>
-                                <strong>{attribute.type}:</strong>{" "} <br />
+                                <strong className="raleway" style={{ fontWeight: 400 }}>{attribute.type}:</strong>{" "} <br />
                                 <div
                                     className="d-flex flex-row"
                                     id="CartItemContainer"
@@ -45,6 +44,7 @@ const CartList: React.FC<CartListProps> = (props) => {
                                     {attribute.type != "Color" && attribute.options.map((option: string) => (
                                         <span
                                             key={option}
+                                            className="sourceSansPro"
                                             data-testid={option === attribute.selected ? `cart-item-attribute-${attribute.type}-${option}-selected` : `cart-item-attribute-${attribute.type}-${option}`}
                                             style={{
                                                 border: 2,

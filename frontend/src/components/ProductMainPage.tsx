@@ -45,7 +45,7 @@ const MainPage: React.FC<MainPageProps> = ( props ) => {
 
   return (
     <div>
-      <div className="category m-3" style={{ fontFamily: 'Raleway', fontWeight: 400, fontSize: 24, }}>{category}</div>
+      <div className="category m-3" style={{ fontFamily: 'Raleway', fontWeight: 400, fontSize: 42}}>{category}</div>
       <div id="mainview" className='d-flex flex-wrap'>
         {data.products.map((cartObject: any) => (
           <ProductCard

@@ -129,7 +129,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
             </div>
 
             <div className="ms-5">
-                <h1 className="ralewayFont-600">{product.name}</h1>
+                <h1 className="raleway" style={{fontWeight: 600}}>{product.name}</h1>
 
                 <div 
                 id="radioButtons"
@@ -138,12 +138,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                         <div
                         data-testid={`product-attribute-${toKebabCase(type)}`}
                         key={type}>
-                            <h3 className="robotoFont-700 capitalize">{type}:</h3>
+                            <h3 className="robotoCondensed capitalize" style={{fontWeight: 700}}>{type}:</h3>
                             <div className="d-flex flex-row">
                                 {groupedAttributes[type].map((value: string) => (
                                     <div
                                         key={value}
-                                        className={`attribute-box ${selectedAttributes[type] === value ? "selected" : ""
+                                        className={`sourceSansPro attribute-box ${selectedAttributes[type] === value ? "selected" : ""
                                             }`}
                                         data-testid={`product-attribute-${type.toLowerCase()}-${value}`}
                                         onClick={() => handleAttributeChange(type, value)}
@@ -158,17 +158,20 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                 </div>
 
 
-                <h1>Price:</h1>
-                <h1>${product.prices[0].amount}</h1>
+                <h1 className="robotoCondensed" style={{fontWeight: 700}}>Price:</h1>
+                <h1 className="raleway" style= {{fontWeight: 700}}>${product.prices[0].amount}</h1>
                 <button
                     disabled={isBuyNowDisabled || product.inStock == 0}
                     onClick={addToCartButton}
-                    className={`${product.inStock == 0 ? "outOfStockButton" : "addToCartButton"} p-1 d-flex justify-content-center align-items-center`}
+                    className={`${product.inStock == 0 ? "outOfStockButton" : "addToCartButton"} p-1 d-flex justify-content-center align-items-center raleway`}
                     data-testid='add-to-cart'
+                    style={{fontWeight:600}}
                 >ADD TO CART</button>
                 <p
                     id="productDescription"
                     data-testid='product-description'
+                    className="roboto"
+                    style={{fontWeight:400, marginTop:30}}
                 >
                     {parse(formattedDescription)}
                 </p>

@@ -39,11 +39,12 @@
 #cartIconBubble {
   background-color: black;
   color: white;
-  border-radius: 4px;
-  width: 12px;
+  border-radius: 99px;
+  width: 20px;
+  height: 20px;
   z-index: 12;
   position: absolute;
-  right: 8px;
+  right: 4px;
 }
 
 .galleryImage {
@@ -141,10 +142,19 @@
 }
 
 .quantityButtons {
-  all:unset;
+  all: unset;
   border: 2px black solid;
   width: 30px;
   height: 30px;
+  font-size: 40px;
+}
+
+.raleway {
+  font-family: Raleway;
+}
+
+.robotoCondensed {
+  font-family: Roboto Condensed;
 }
 
 .ralewayFont-300 {
@@ -222,4 +232,16 @@
 
 .cartAlign {
   flex: 1
+}
+
+#cartPrice {
+  font-size: large;
+}
+
+.sourceSansPro {
+  font-family: Source Sans Pro;
+}
+
+.roboto {
+  font-family: Roboto;
 }

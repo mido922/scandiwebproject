@@ -1,5 +1,4 @@
 import { gql, useQuery } from "@apollo/client";
-import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import CartList from "./CartList";
 
@@ -64,8 +63,8 @@ const Header: React.FC<HeaderProps> = (props) => {
         <img className="logoIcon" src="https://i.imgur.com/oRJfdK8.png"></img>
         <br></br>
         {props.cartCount}
-        <button id="cartIconContainer" data-testid='cart-btn' onClick={props.toggleCart}>
-          {(props.cartLength > 0) && (<div id="cartIconBubble">{props.cartLength}</div>)}
+        <button id="cartIconContainer"  data-testid='cart-btn' onClick={props.toggleCart}>
+          {(props.cartLength > 0) && (<div id="cartIconBubble" className="d-flex justify-content-center align-items-center">{props.cartLength}</div>)}
           <img className="cartIcon" src="https://i.imgur.com/CeWkpes.png" />
         </button>
       </header>
