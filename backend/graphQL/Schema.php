@@ -48,9 +48,9 @@ $mutationType = new ObjectType([
     'name' => 'Mutation',
     'fields' => [
         'saveOrder' => [
-            'type' => $saveOrderResponseType, // Response type
+            'type' => $saveOrderResponseType,
             'args' => [
-                'orderedItems' => Type::nonNull(Type::listOf($orderedItemInputType)), // List of ordered items
+                'orderedItems' => Type::nonNull(Type::listOf($orderedItemInputType)),
             ],
             'resolve' => function ($root, $args) use ($pdo) {
                 try {
@@ -68,11 +68,11 @@ $mutationType = new ObjectType([
                             VALUES (:product_id, :order_id, :quantity)
                         ");
                         $stmt->execute([
-                            'product_id' => $item['product_id'], // Now treating product_id as a string
+                            'product_id' => $item['product_id'],
                             'order_id' => $orderId,
                             'quantity' => $item['quantity'],
                         ]);
-                        $orderedItemId = $pdo->lastInsertId(); // Get the newly created ordered item ID
+                        $orderedItemId = $pdo->lastInsertId(); 
 
                        foreach ($item['attributes'] as $attribute) {
                             $stmt = $pdo->prepare("
@@ -81,8 +81,8 @@ $mutationType = new ObjectType([
                             ");
                             $stmt->execute([
                                 'ordered_item_id' => $orderedItemId,
-                                'type' => $attribute['type'], // E.g., "Size"
-                                'value' => $attribute['value'], // E.g., "40"
+                                'type' => $attribute['type'],
+                                'value' => $attribute['value'],
                             ]);
                         }
                     }
@@ -192,7 +192,6 @@ $queryType = new ObjectType([
                     $stmt->bindValue(':category', $args['category'], PDO::PARAM_STR);
                     $stmt->execute();
                 } else {
-                    // Query all products
                     $stmt = $pdo->query('SELECT * FROM products');
                 }
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);

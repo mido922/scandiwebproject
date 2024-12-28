@@ -251,19 +251,6 @@
   width: 150px;
 }
 
-/* .galleryImage {
-  object-fit: cover;
-  flex-shrink: 5;
-  min-width: 1px;
-} */
-
-/* #galleryImageWrapper {
-  width: 100px;
-  height: 100px;
-  padding: 5px;
-  border: 1px red dotted;
-} */
-
 .carouselButton {
   position: absolute;
   top: 50%;

@@ -2,13 +2,12 @@ import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import CartList from "./CartList";
 
-interface HeaderProps extends Record<string, any> { }
+interface HeaderProps extends Record<string, any> {}
 
 const Header: React.FC<HeaderProps> = (props) => {
-
   const GET_PRODUCTS = gql`
     query GetProducts($category: String) {
-        products (category:$category) {
+      products(category: $category) {
         id
         name
         brand
@@ -26,45 +25,92 @@ const Header: React.FC<HeaderProps> = (props) => {
           value
         }
       }
-    }`;
+    }
+  `;
 
-  const { category } = useParams()
+  const { category } = useParams();
 
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
-    variables: { category: category || null }
+    variables: { category: category || null },
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  console.log(data)
+  console.log(data);
 
   return (
     <div className="d-flex flex-column align-items-end mb-5">
-      <header id="header" className='navbar container justify-content-between'>
+      <header id="header" className="navbar container justify-content-between">
         <div className="d-flex">
           <div>
             <a
-              className={`categorybutton p-3 ${props.category == null ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/all"
-              data-testid={`${props.category == null ? 'active-category-link' : 'category-link'}`}
-            >ALL</a>
+              className={`categorybutton p-3 ${
+                props.category == null
+                  ? "active ralewayFont-600"
+                  : "ralewayFont-400"
+              }`}
+              href="/all"
+              data-testid={`${
+                props.category == null
+                  ? "active-category-link"
+                  : "category-link"
+              }`}
+            >
+              ALL
+            </a>
           </div>
           <div>
-            <a className={`categorybutton p-3 ${props.category == "tech" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/tech"
-              data-testid={`${props.category == "tech" ? 'active-category-link' : 'category-link'}`}
-            >TECH</a>
+            <a
+              className={`categorybutton p-3 ${
+                props.category == "tech"
+                  ? "active ralewayFont-600"
+                  : "ralewayFont-400"
+              }`}
+              href="/tech"
+              data-testid={`${
+                props.category == "tech"
+                  ? "active-category-link"
+                  : "category-link"
+              }`}
+            >
+              TECH
+            </a>
           </div>
           <div>
-            <a className={`categorybutton p-3 ${props.category == "clothes" ? 'active ralewayFont-600' : 'ralewayFont-400'}`} href="/clothes"
-              data-testid={`${props.category == "clothes" ? 'active-category-link' : 'category-link'}`}
-            >CLOTHES</a>
+            <a
+              className={`categorybutton p-3 ${
+                props.category == "clothes"
+                  ? "active ralewayFont-600"
+                  : "ralewayFont-400"
+              }`}
+              href="/clothes"
+              data-testid={`${
+                props.category == "clothes"
+                  ? "active-category-link"
+                  : "category-link"
+              }`}
+            >
+              CLOTHES
+            </a>
           </div>
         </div>
         <img className="logoIcon" src="https://i.imgur.com/oRJfdK8.png"></img>
         <br></br>
         {props.cartCount}
-        <button id="cartIconContainer"  data-testid='cart-btn' onClick={props.toggleCart}>
-          {(props.cartLength > 0) && (<div id="cartIconBubble" className="d-flex justify-content-center align-items-center">{props.cartLength}</div>)}
+        <button
+          id="cartIconContainer"
+          data-testid="cart-btn"
+          onClick={props.toggleCart}
+        >
+          {props.cartLength > 0 && (
+            <div
+              id="cartIconBubble"
+              className="d-flex justify-content-center align-items-center"
+            >
+              {props.cartLength}
+            </div>
+          )}
           <img className="cartIcon" src="https://i.imgur.com/CeWkpes.png" />
         </button>
       </header>
@@ -77,13 +123,10 @@ const Header: React.FC<HeaderProps> = (props) => {
         />
       )}
       {props.isCartOpen && (
-        <div className='overlay-background' onClick={props.toggleCart}>
-        </div>
+        <div className="overlay-background" onClick={props.toggleCart}></div>
       )}
-
-
     </div>
-  )
-}
+  );
+};
 
 export default Header;
