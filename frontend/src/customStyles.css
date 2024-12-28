@@ -251,8 +251,50 @@
   width: 150px;
 }
 
+
+
+/* Carousel */
+/* src/App.css */
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 500px; /* Set max width */
+  height: 600px; /* Set max height */
+  overflow: hidden; /* Ensure no overflow from the container */
+}
+
+.carousel-image img {
+  width: 100%; /* Make the image responsive */
+  height: 100%; /* Ensure the image fills the container */
+  object-fit: cover; /* Ensure the image covers the entire area without distorting */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px;
+}
+
 .carouselButton {
   position: absolute;
   top: 50%;
   width: 40px;
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
 }

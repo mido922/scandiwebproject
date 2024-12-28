@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
   const toKebabCase = (str: any) => str.replace(/\s+/g, "-").toLowerCase();
 
   return (
-    <div
+    <div style={{cursor:"pointer"}}
       data-testid={`product-${toKebabCase(cartObject.name)}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -76,7 +76,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
         {!cartObject.inStock && (
           <p
-            style={{ fontFamily: "Raleway", fontWeight: 400, fontSize: 24 }}
+            style={{ fontFamily: "Raleway", fontWeight: 400, fontSize: 24, }}
             className="out-of-stock-image container d-flex justify-content-center align-items-center"
           >
             {" "}

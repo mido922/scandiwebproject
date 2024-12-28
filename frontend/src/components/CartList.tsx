@@ -146,6 +146,7 @@ const CartList: React.FC<CartListProps> = (props) => {
         className="addToCartButton d-flex justify-content-center align-items-center"
         style={{
           fontWeight: 600,
+          backgroundColor:props.cartItems.length == 0 ? "grey" : "",
         }}
       >
         PLACE ORDER

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
 import LeftArrow from "../assets/LeftArrow.png";
 import RightArrow from "../assets/RightArrow.png";
+import Carousel from "./Carousel";
 
 interface ProductDetailsProps extends Record<string, any> {}
 
@@ -70,17 +71,21 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
 
   const toKebabCase = (str: any) => str.replace(/\s+/g, "-").toLowerCase();
 
+  /*Carousel*/
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const jumpToImage = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   return (
     <div className="container d-flex flex-row">
       <div
         className="d-flex flex-column flex-nowrap justify-content-between gap-2"
-        data-testid="product-gallery"
         style={{ height: 600 }}
       >
         {product.galleries.length > 1 &&
-          product.galleries.map((cartObject: any) => (
+          product.galleries.map((cartObject: any, index: number) => (
             <div
-              className=""
               style={{
                 width: "100px",
                 backgroundImage: `url(${cartObject.url})`,
@@ -88,49 +93,19 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 flex: "1 1 auto",
+                cursor: "pointer"
               }}
+              onClick={() => jumpToImage(index)}
             ></div>
           ))}
       </div>
 
-      <div
-        id="productCarousel"
-        className="carousel m-2"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner">
-          {product.galleries.map((image: any, index: any) => (
-            <div
-              key={index}
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-            >
-              <img
-                src={image.url}
-                alt={`Slide ${index + 1}`}
-                style={{ objectFit: "cover", maxHeight: "500px" }}
-              />
-            </div>
-          ))}
-        </div>
-
-        <button
-          className="carousel-control-prev "
-          type="button"
-          data-bs-target="#productCarousel"
-          data-bs-slide="prev"
-        >
-          <img className="carouselButton" src={LeftArrow} />
-        </button>
-
-        <button
-          className="carousel-control-next carouselButton"
-          type="button"
-          data-bs-target="#productCarousel"
-          data-bs-slide="next"
-        >
-          <img className="carouselButton" src={RightArrow} />
-        </button>
-      </div>
+      <Carousel
+        galleries={product.galleries}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        data-testid="product-gallery"
+      />
 
       <div className="ms-5">
         <h1 className="raleway" style={{ fontWeight: 600 }}>
