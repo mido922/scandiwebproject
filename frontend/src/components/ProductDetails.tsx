@@ -78,7 +78,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
   };
 
   return (
-    <div className="container d-flex flex-row">
+    <div className="container d-flex flex-row" data-testid="product-gallery">
       <div
         className="d-flex flex-column flex-nowrap justify-content-between gap-2"
         style={{ height: 600 }}
@@ -104,7 +104,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
         galleries={product.galleries}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
-        data-testid="product-gallery"
+        
       />
 
       <div className="ms-5">
