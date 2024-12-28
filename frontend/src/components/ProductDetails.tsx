@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 import { useLocation } from "react-router-dom";
 import parse from 'html-react-parser';
+import LeftArrow from "../assets/LeftArrow.png";
+import RightArrow from "../assets/RightArrow.png";
+
 
 interface ProductDetailsProps extends Record<string, any> { }
 
@@ -35,7 +38,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
     );
 
     const addToCartButton = () => {
-        handleAddToCart ()
+        handleAddToCart()
         console.log("hi")
         props.toggleCart()
     }
@@ -61,84 +64,107 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
         )
     }
 
-    const toKebabCase = (str:any) => str.replace(/\s+/g, '-').toLowerCase();
+    const toKebabCase = (str: any) => str.replace(/\s+/g, '-').toLowerCase();
 
     return (
         <div className="container d-flex flex-row">
-            <div 
-            id="galleries"
-            className="d-flex"
-            data-testid='product-gallery'
-            >
-                <div className="galleryList  d-flex flex-column flex-nowrap" id="productDetailsGalleries">
-                    {product.galleries.length > 1 && product.galleries.map((cartObject: any) => (
-                        <img
-                            key={product.galleries.id}
-                            className="galleryImage border m-2" src={cartObject.url} />
+
+
+
+
+            {/* <div
+                id="galleries"
+                className="d-flex"
+                data-testid='product-gallery'
+                style={{ height: 300 }}
+            > */}
+
+            {/* <div className="galleryList d-flex flex-column flex-nowrap justify-content-between align-items-stretch" id="productDetailsGalleries">
+                {product.galleries.length > 1 && product.galleries.map((cartObject: any) => (
+                    // console.log(cartObject.url)
+                    <div id="galleryImageWrapper" style={{backgroundImage: `url(${cartObject.url})`}}></div>
+                    // <img
+                    //     className="flex-fill galleryImage border m-2" src={cartObject.url}
+                    // />
+                ))}
+            </div> */}
+
+            <div className="d-flex flex-column flex-nowrap justify-content-between gap-2" data-testid='product-gallery' style={{height:600}}>
+                {product.galleries.length > 1 && product.galleries.map((cartObject: any) => (
+                    // console.log(cartObject.url)
+                    // <div>test</div>
+                    // <div className="p-5 bg-primary"></div>
+                    <div
+                    className=""
+                        style={{
+                            width: "100px",
+                            // height: "100px",
+                            backgroundImage: `url(${cartObject.url})`,
+                            backgroundSize: "contain",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                            flex: "1 1 auto",
+                        }}
+                    ></div>
+                    // <img
+                    //     className="flex-fill galleryImage border m-2" src={cartObject.url}
+                    // />
+                ))}
+            </div>
+
+
+            <div id="productCarousel" className="carousel m-2" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                    {product.galleries.map((image: any, index: any) => (
+                        <div
+                            key={index}
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        >
+                            <img
+                                src={image.url}
+                                alt={`Slide ${index + 1}`}
+                                style={{ objectFit: "cover", maxHeight: "500px" }}
+                            />
+                        </div>
                     ))}
                 </div>
 
-                <div id="productCarousel" className="carousel slide m-2" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        {product.galleries.map((_: any, index: any) => (
-                            <button
-                                key={index}
-                                type="button"
-                                data-bs-target="#productCarousel"
-                                data-bs-slide-to={index}
-                                className={index === 0 ? "active" : ""}
-                                aria-current={index === 0 ? "true" : undefined}
-                                aria-label={`Slide ${index + 1}`}
-                            ></button>
-                        ))}
-                    </div>
-                    <div className="carousel-inner">
-                        {product.galleries.map((image: any, index: any) => (
-                            <div
-                                key={index}
-                                className={`carousel-item ${index === 0 ? "active" : ""}`}
-                            >
-                                <img
-                                    src={image.url}
-                                    alt={`Slide ${index + 1}`}
-                                    style={{ objectFit: "cover", maxHeight: "500px" }}
-                                />
-                            </div>
-                        ))}
-                    </div>
 
-                    <button
-                        className="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#productCarousel"
-                        data-bs-slide="prev"
-                    >
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button
-                        className="carousel-control-next"
-                        type="button"
-                        data-bs-target="#productCarousel"
-                        data-bs-slide="next"
-                    >
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                    </button>
-                </div>
+                <button
+                    className="carousel-control-prev "
+                    type="button"
+                    data-bs-target="#productCarousel"
+                    data-bs-slide="prev"
+                    
+                >
+                    <img className="carouselButton" src={LeftArrow} />
+
+
+                </button>
+
+                <button
+                    className="carousel-control-next carouselButton"
+                    type="button"
+                    data-bs-target="#productCarousel"
+                    data-bs-slide="next"
+                >
+                    <img className="carouselButton" src={RightArrow} />
+
+
+                </button>
             </div>
 
             <div className="ms-5">
-                <h1 className="raleway" style={{fontWeight: 600}}>{product.name}</h1>
-
-                <div 
-                id="radioButtons"
+                <h1 className="raleway" style={{ fontWeight: 600 }}>{product.name}</h1>
+                <div
+                    id="radioButtons"
                 >
                     {Object.keys(groupedAttributes).map((type) => (
                         <div
-                        data-testid={`product-attribute-${toKebabCase(type)}`}
-                        key={type}>
-                            <h3 className="robotoCondensed capitalize" style={{fontWeight: 700}}>{type}:</h3>
+                            data-testid={`product-attribute-${toKebabCase(type)}`}
+                            className="mb-3"
+                            key={type}>
+                            <h5 className="robotoCondensed capitalize" style={{ fontWeight: 700 }}>{type.toUpperCase()}:</h5>
                             <div className="d-flex flex-row">
                                 {groupedAttributes[type].map((value: string) => (
                                     <div
@@ -158,20 +184,20 @@ const ProductDetails: React.FC<ProductDetailsProps> = (props) => {
                 </div>
 
 
-                <h1 className="robotoCondensed" style={{fontWeight: 700}}>Price:</h1>
-                <h1 className="raleway" style= {{fontWeight: 700}}>${product.prices[0].amount}</h1>
+                <h5 className="robotoCondensed" style={{ fontWeight: 700 }}>PRICE:</h5>
+                <h4 className="raleway" style={{ fontWeight: 700 }}>${product.prices[0].amount}</h4>
                 <button
                     disabled={isBuyNowDisabled || product.inStock == 0}
                     onClick={addToCartButton}
                     className={`${product.inStock == 0 ? "outOfStockButton" : "addToCartButton"} p-1 d-flex justify-content-center align-items-center raleway`}
                     data-testid='add-to-cart'
-                    style={{fontWeight:600}}
+                    style={{ fontWeight: 600 }}
                 >ADD TO CART</button>
                 <p
                     id="productDescription"
                     data-testid='product-description'
                     className="roboto"
-                    style={{fontWeight:400, marginTop:30}}
+                    style={{ fontWeight: 400, marginTop: 30 }}
                 >
                     {parse(formattedDescription)}
                 </p>

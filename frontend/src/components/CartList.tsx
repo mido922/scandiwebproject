@@ -24,13 +24,16 @@ const CartList: React.FC<CartListProps> = (props) => {
             className="cartList"
             data-testid="cart-overlay"
         >
-            <div className="d-flex align-items-center"><div className="p-3 ralewayFont-700">My Bag,</div><div data-testid='cart-item-amount' >{totalItemsText}</div></div>
+            <div className="d-flex align-items-center mb-2">
+                <div className="ralewayFont-700">My Bag,</div>
+                <div className="ralewayFont-500 ms-1" data-testid='cart-item-amount' >{totalItemsText}</div>
+            </div>
 
 
             {props.cartItems.map((item: any) => (
-                <div className="cartBox row container d-flex flex-row ralewayFont-300 m-3">
+                <div className="cartBox row container d-flex flex-row ralewayFont-300 mb-5" style={{paddingLeft: 0}}>
 
-                    <div className="cartAlign col-7 cartDetail d-flex flex-column">
+                    <div className="cartAlign col-7 cartDetail d-flex flex-column justify-content-between">
                         <h3 className="roboto" style={{ fontWeight: 300 }}>{item.name}</h3>
                         <h3 id="cartPrice">${item.prices[0].amount * item.quantity}</h3>
                         {item.attributes.map((attribute: any) => (
@@ -101,13 +104,13 @@ const CartList: React.FC<CartListProps> = (props) => {
 
 
                     <div className="cartAlign col-4 cartImage d-flex align-items-center">
-                        <img style={{ width: 200, height: 200, }} src={item.galleries[0].url}></img>
+                        <img style={{ width: 150, height: 200, }} src={item.galleries[0].url}></img>
                     </div>
                 </div>
             ))}
 
-            <div className="d-flex robotoFont-500 justify-content-between align-items-center">
-                <h1>Total</h1>
+            <div className="d-flex robotoFont-500 justify-content-between align-items-center mb-3">
+                <div style={{fontWeight:500, fontSize:16}}>Total</div>
                 <div data-testid='cart-total'>${totalCost}</div>
             </div>
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import instantBuyImageIcon from "../assets/instantBuyImageIcon.png";
 
 interface ProductCardProps extends Record<string, any> { }
 
@@ -66,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
                 e.stopPropagation();
                 handleInstantAdd();
               }}
-              disabled={!cartObject.inStock}><img className="instantBuyImage" src="https://i.imgur.com/2dyKRFB.png" /></button>
+              disabled={!cartObject.inStock}><img className="instantBuyImage" src={instantBuyImageIcon} /></button>
           )}
         </div>
 
@@ -77,8 +78,8 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
       <div>
         <h3 style={{ fontFamily: 'Raleway', fontWeight: 300 }}>{cartObject.name}</h3>
-        <p style={{fontWeight:500}}>
-          {cartObject.prices[0].amount}$
+        <p style={{fontWeight:400, fontFamily: 'Raleway'}}>
+        ${cartObject.prices[0].amount}
         </p>
       </div>
     </div>

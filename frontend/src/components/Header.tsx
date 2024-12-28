@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   console.log(data)
 
   return (
-    <div className="d-flex flex-column align-items-end">
+    <div className="d-flex flex-column align-items-end mb-5">
       <header id="header" className='navbar container justify-content-between'>
         <div className="d-flex">
           <div>
